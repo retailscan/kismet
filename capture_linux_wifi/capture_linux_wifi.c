@@ -1597,7 +1597,11 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     local_wifi_t *local_wifi = (local_wifi_t *) caph->userdata;
     int ret;
 
-    fprintf(stderr, "debug - pcap_dispatch - got packet %u, fcf=%x\n", header->caplen, data[0]);
+    fprintf(stderr, "debug - pcap_dispatch - got packet %u", header->caplen);
+
+    for (int i=0; i<16; i++) {
+	fprinf(stderr, "%X ", *(data+i));
+    }
 
     /* Try repeatedly to send the packet; go into a thread wait state if
      * the write buffer is full & we'll be woken up as soon as it flushes
