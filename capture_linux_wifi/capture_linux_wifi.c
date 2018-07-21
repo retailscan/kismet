@@ -1596,13 +1596,14 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     kis_capture_handler_t *caph = (kis_capture_handler_t *) user;
     local_wifi_t *local_wifi = (local_wifi_t *) caph->userdata;
     int ret;
+    int radio_len = data[2] + data[3]*255;
+    fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d\n", header->caplen, radio_len);
 
-    fprintf(stderr, "debug - pcap_dispatch - got packet %u", header->caplen);
-
-    for (int i=0; i<16; i++) {
+    for (int i=radio_len; i<16; i++) {
 	fprintf(stderr, "%X ", *(data+i));
     }
 
+	fprintf(stderr, "\n");
     /* Try repeatedly to send the packet; go into a thread wait state if
      * the write buffer is full & we'll be woken up as soon as it flushes
      * data out in the main select() loop */
