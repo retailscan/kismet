@@ -1597,11 +1597,8 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     local_wifi_t *local_wifi = (local_wifi_t *) caph->userdata;
     int ret;
     int radio_len = data[2] + data[3]*255;
-    fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d\n", header->caplen, radio_len);
+    fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d, fcs=%x\n", header->caplen, radio_len, data[radio_len]);
 
-    for (int i=radio_len; i<header->caplen-radio_len; i++) {
-	fprintf(stderr, "%X ", *(data+i));
-    }
 
 	fprintf(stderr, "\n");
     /* Try repeatedly to send the packet; go into a thread wait state if
