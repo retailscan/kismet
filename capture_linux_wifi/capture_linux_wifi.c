@@ -1597,11 +1597,11 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     local_wifi_t *local_wifi = (local_wifi_t *) caph->userdata;
     int ret;
     int radio_len = data[2] + data[3]*255;
-    u_char fcf = data[radio_len]
+    unsigned char fcf = data[radio_len]
 
-    u_char Type = (fcf & 12) >> 2;
-    u_char SubType = (fcf & 240) >> 4;
-    u_char Version = fcf & 3;
+    unsigned char Type = (fcf & 12) >> 2;
+    unsigned char SubType = (fcf & 240) >> 4;
+    unsigned char Version = fcf & 3;
 
     fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d, fcf=%x, Type=%d Subtype=%d, Version=%d\n", header->caplen, radio_len, fcf, Type, SubType, Version);
 
