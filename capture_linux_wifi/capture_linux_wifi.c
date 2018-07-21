@@ -1599,7 +1599,7 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     int radio_len = data[2] + data[3]*255;
     fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d\n", header->caplen, radio_len);
 
-    for (int i=radio_len; i<16; i++) {
+    for (int i=radio_len; i<header->caplen-radio_len; i++) {
 	fprintf(stderr, "%X ", *(data+i));
     }
 
