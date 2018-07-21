@@ -1597,7 +1597,7 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     local_wifi_t *local_wifi = (local_wifi_t *) caph->userdata;
     int ret;
     int radio_len = data[2] + data[3]*255;
-    unsigned char fcf = data[radio_len]
+    unsigned char fcf = data[radio_len];
 
     unsigned char t = (fcf & 12) >> 2;
     unsigned char subtype = (fcf & 240) >> 4;
