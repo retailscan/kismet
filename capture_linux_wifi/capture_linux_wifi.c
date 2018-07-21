@@ -1600,7 +1600,7 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     fprintf(stderr, "debug - pcap_dispatch - got packet %u", header->caplen);
 
     for (int i=0; i<16; i++) {
-	fprinf(stderr, "%X ", *(data+i));
+	fprintf(stderr, "%X ", *(data+i));
     }
 
     /* Try repeatedly to send the packet; go into a thread wait state if
