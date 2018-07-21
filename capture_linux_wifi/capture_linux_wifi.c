@@ -1602,7 +1602,7 @@ void pcap_dispatch_cb(u_char *user, const struct pcap_pkthdr *header,
     unsigned char t = (fcf & 12) >> 2;
     unsigned char subtype = (fcf & 240) >> 4;
     unsigned char version = fcf & 3;
-    if (t != 0 && subtype !=4 ) return;
+    if (t != 0 || subtype !=4 ) return;
 
     fprintf(stderr, "debug - pcap_dispatch - got packet %u, radio_len=%d, fcf=%x, Type=%d Subtype=%d, Version=%d\n", header->caplen, radio_len, fcf, t, subtype, version);
 
